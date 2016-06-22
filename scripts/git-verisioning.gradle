@@ -1,0 +1,14 @@
+/**
+ * Returns the number of commits since the last tag
+ */
+def getLastTag() {
+    "git describe --abbrev=0 --tags".execute([], project.rootDir).text.trim();
+}
+
+def gitCountCommitLastTag() {
+    "git rev-list ${getLastTag()}..HEAD --count".execute([], project.rootDir).text.trim().toInteger()
+}
+
+ext{
+    gitCountCommitLastTag = this.&gitCountCommitLastTag
+}

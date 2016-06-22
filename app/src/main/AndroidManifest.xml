@@ -1,0 +1,29 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.octo.mob.octomeuh">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".OctoMeuhApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+
+        <activity
+            android:name=".countdown.screen.CountDownActivity"
+            android:screenOrientation="locked">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="9fc63e3d4a99cc49f8abe5ffaa59de5d63ba38f8" />
+    </application>
+
+</manifest>

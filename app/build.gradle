@@ -1,0 +1,129 @@
+apply plugin: 'android-sdk-manager'
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'io.fabric'
+apply plugin: 'jacoco'
+apply plugin: 'com.github.triplet.play'
+apply from: '../scripts/git-verisioning.gradle'
+
+def versionBuild = gitCountCommitLastTag()
+
+android {
+
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.octo.mob.octomeuh"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode versionMajor * 100000000 + versionMinor * 10000000 + versionPatch * 10000 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'OCTOmeuh-release'
+            keyPassword octomeuhKeyPassword
+            storeFile file('keystores/OCTOmeuh-release.jks')
+            storePassword octomeuhStorePassword
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
+    play {
+        track = 'alpha'
+        jsonFile = file('playstore-key.json')
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile kotlib
+    compile "com.android.support:appcompat-v7:$supportLibVersion"
+    compile "com.android.support:design:$supportLibVersion"
+    compile "com.android.support:support-annotations:$supportLibVersion"
+    compile 'org.jetbrains.anko:anko-common:0.8.3'
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
+    }
+
+    kapt 'com.google.dagger:dagger-compiler:2.4'
+    compile 'com.google.dagger:dagger:2.4'
+
+    testCompile 'org.mockito:mockito-core:2.0.53-beta'
+    testCompile 'com.tngtech.java:junit-dataprovider:1.11.0'
+    testCompile "junit:junit:$junitVersion"
+}
+
+kapt {
+    generateStubs = true
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
+
+    group = 'Reporting'
+    description = 'Generate Jacoco coverage reports after running tests.'
+
+    executionData = fileTree(dir: project.projectDir, includes: ['**/*.exec', '**/*.ec'])
+    classDirectories = fileTree(
+            dir: "${project.buildDir}/intermediates/classes/debug",
+            excludes: ['**/R.class',
+                       '**/R$*.class',
+                       '**/BuildConfig.class',
+                       '**/*$InjectAdapter.class',
+                       '**/*$InjectAdapter.java',
+                       '**/*$ModuleAdapter.class',
+                       '**/*$ModuleAdapter.java',
+                       '**/*$ModuleAdapter$*.class',
+                       '**/*$ViewInjector*.class',
+                       '**/*$ViewInjector*.java',
+                       'android/**/*.*'
+            ])
+    sourceDirectories = files(["${project.projectDir}/src/main/kotlin"])
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        csv.enabled = false
+    }
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- CountDown Screen -->
+    <string name="start_chrono">Démarrer</string>
+    <string name="stop_chrono">Arrêter</string>
+    <string name="time_per_people">Temps par participant</string>
+    <string name="next_speaker">Participant suivant</string>
+    <string name="total_elapsed_time">Temps total écoulé</string>
+    <string name="speaker_counter">Nombre de personnes ayant parlé</string>
+
+    <string name="action_edit_countdown_per_attendee">Modifier la durée par participant</string>
+    <string name="action_give_feedback">Donner son avis sur l\'application</string>
+    <string name="action_change_loop_mode">Changement du mode répétation</string>
+
+    <!-- Repetition mode selector Screen -->
+    <string name="repetition_mode_selector_title">Selection du mode de répétition</string>
+    <string name="loop_mode_title">AUTOMATIQUE</string>
+    <string name="loop_mode_description">Lorsque le temps d\'une personne est écoulée le timer passe automatiquement à la personne suivante</string>
+    <string name="step_by_step_mode_title">MANUEL</string>
+    <string name="step_by_step_mode_description">Lorsque le temps d\'une personne est écoulé une action est requise pour commencer le timer de la personne suivante</string>
+
+
+</resources>

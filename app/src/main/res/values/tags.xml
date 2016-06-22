@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tag_logo_click" translatable="false">App logo clicked</string>
+    <string name="tag_send_feedback" translatable="false">Send feedback</string>
+    <string name="tag_change_countdown_duration" translatable="false">Change default duration</string>
+    <string name="tag_duration" translatable="false">Duration</string>
+    <string name="tag_octo_logo_clicked" translatable="false">Octo logo clicked</string>
+    <string name="tag_app_started" translatable="false">App started</string>
+</resources>

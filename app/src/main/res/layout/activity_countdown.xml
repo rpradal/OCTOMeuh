@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginBottom="@dimen/material_margin_medium"
+        android:layout_marginTop="@dimen/material_margin_medium">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/buttonsLayout"
+            android:layout_marginLeft="@dimen/material_margin_medium"
+            android:layout_marginRight="@dimen/material_margin_medium">
+
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:contentDescription="@null"
+                android:src="@drawable/octo_meuh_logo" />
+
+            <TextView
+                android:id="@+id/timerTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:contentDescription="@null"
+                android:src="@drawable/octo_meuh_logo"
+                android:textColor="@color/octo_blue_light"
+                android:textSize="130sp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/buttonsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/detailFooterLayout"
+            android:layout_marginBottom="@dimen/material_margin_xxlarge"
+            android:layout_marginLeft="@dimen/material_margin_medium"
+            android:layout_marginRight="@dimen/material_margin_medium"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/stopTimerButton"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/material_margin_small"
+                    android:text="@string/stop_chrono"
+                    android:enabled="false"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/startTimerButton"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/material_margin_small"
+                    android:text="@string/start_chrono" />
+
+                <Button
+                    android:id="@+id/nextSpeakerButton"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/material_margin_small"
+                    android:text="@string/next_speaker"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/octoPoweredImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@null"
+            android:src="@drawable/powered_by_octo" />
+
+
+        <LinearLayout
+            android:id="@+id/detailFooterLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:contentDescription="@null"
+            android:orientation="vertical"
+            android:visibility="invisible">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/separator_color" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/material_margin_medium"
+                android:layout_marginRight="@dimen/material_margin_medium"
+                android:layout_marginTop="@dimen/material_margin_medium">
+
+                <ImageView
+                    android:id="@+id/chronoImageView"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="@dimen/material_margin_medium"
+                    android:layout_marginRight="@dimen/material_margin_medium"
+                    android:src="@drawable/ic_access_time_black_24dp"
+                    android:contentDescription="@string/total_elapsed_time"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/chronoImageView"
+                    android:layout_toRightOf="@id/chronoImageView"
+                    android:layout_marginEnd="@dimen/material_margin_medium"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:layout_toStartOf="@+id/elapsedTimeChronometer"
+                    android:text="@string/total_elapsed_time"
+                    android:textColor="@android:color/black"
+                    android:layout_marginRight="@dimen/material_margin_medium"
+                    android:layout_toLeftOf="@+id/elapsedTimeChronometer" />
+
+                <Chronometer
+                    android:id="@+id/elapsedTimeChronometer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/octo_blue_light" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/material_margin_medium"
+                android:background="@color/separator_color" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/material_margin_medium"
+                android:layout_marginRight="@dimen/material_margin_medium"
+                android:layout_marginTop="@dimen/material_margin_medium">
+
+                <ImageView
+                    android:id="@+id/totalSpeakersImageView"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="@dimen/material_margin_medium"
+                    android:layout_marginRight="@dimen/material_margin_medium"
+                    android:src="@drawable/ic_attendee_number_black_24dp"
+                    android:contentDescription="@string/speaker_counter" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/totalSpeakersImageView"
+                    android:layout_toRightOf="@id/totalSpeakersImageView"
+                    android:layout_toStartOf="@+id/totalSpeakersTextView"
+                    android:layout_marginEnd="@dimen/material_margin_medium"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@string/speaker_counter"
+                    android:textColor="@android:color/black"
+                    android:layout_toLeftOf="@+id/totalSpeakersTextView"
+                    android:layout_marginRight="@dimen/material_margin_medium" />
+
+                <TextView
+                    android:id="@+id/totalSpeakersTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="0"
+                    android:textColor="@color/octo_blue_light"
+                    tools:ignore="HardcodedText" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/octo_blue"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+</RelativeLayout>

@@ -1,0 +1,28 @@
+<resources>
+    <!-- Configuration -->
+    <string name="app_name" translatable="false">OCTOMeuh</string>
+    <string name="url_octo" translatable="false">http://www.octo.com</string>
+    <string name="email_address_feedback_receiver" translatable="false">rpr@octo.com</string>
+    <string name="feedback_default_subject" translatable="false">OCTOMeuh feedback</string>
+
+    <!-- Count down screen wording -->
+    <string name="start_chrono">Start</string>
+    <string name="stop_chrono">Stop</string>
+    <string name="time_per_people">Time per attendee</string>
+    <string name="next_speaker">Next speaker</string>
+    <string name="total_elapsed_time">Total elapsed time</string>
+    <string name="speaker_counter">Speaker counter</string>
+
+    <string name="action_edit_countdown_per_attendee">Edit countdown duration per attendee</string>
+    <string name="action_give_feedback">Give a feedback concerning the app</string>
+    <string name="action_change_loop_mode">Change repetition mode</string>
+
+    <!-- Repetition mode selector Screen -->
+    <string name="repetition_mode_selector_title">Select repetition mode</string>
+    <string name="loop_mode_title">AUTOMATIC</string>
+    <string name="loop_mode_description">When the speech duration of a speaker is elapsed, the next speaker countdown starts automatically</string>
+    <string name="step_by_step_mode_title">MANUAL</string>
+    <string name="step_by_step_mode_description">When the speech duration of a speaker is elapsed, a manual action is required before the next speaker countdown starts</string>
+
+
+</resources>
