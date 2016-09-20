@@ -2,7 +2,6 @@ package com.octo.mob.octomeuh.countdown.injection
 
 import com.octo.mob.octomeuh.OctoMeuhApplication
 import com.octo.mob.octomeuh.countdown.screen.CountDownActivity
-import com.octo.mob.octomeuh.countdown.screen.RepetitionModeDialogFragment
 import com.octo.mob.octomeuh.transversal.injection.AppComponent
 import dagger.Component
 import javax.inject.Scope
@@ -13,7 +12,6 @@ import javax.inject.Scope
 interface CountDownComponent {
 
     fun inject(countDownActivity: CountDownActivity)
-    fun inject(repetitionModeDialogFragment: RepetitionModeDialogFragment)
 
     companion object Initializer {
         fun init(): CountDownComponent {

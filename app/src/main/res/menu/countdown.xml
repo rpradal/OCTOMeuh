@@ -12,19 +12,18 @@
         </menu>
     </item>
 
+
     <item
-        android:id="@+id/action_play_mode"
-        android:icon="@drawable/ic_repeat_white_24dp"
-        android:title="@string/action_change_loop_mode"
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings_white_24dp"
+        android:title="@string/settings"
         android:visible="true"
-        app:showAsAction="ifRoom" >
-    </item>
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_feedback"
         android:icon="@drawable/ic_announcement_white_24dp"
         android:title="@string/action_give_feedback"
         android:visible="true"
-        app:showAsAction="never" >
-    </item>
+        app:showAsAction="never" />
 </menu>

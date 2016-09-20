@@ -1,23 +1,38 @@
 <resources>
+    <style name="settings_list"/>
 
-    <!-- Base application theme -->
-    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar" />
-
-    <style name="AppTheme" parent="BaseAppTheme">
-        <item name="colorPrimaryDark">@color/octo_blue_dark</item>
-        <item name="colorPrimary">@color/octo_blue</item>
-        <item name="colorAccent">@color/octo_blue_light</item>
-        <item name="android:windowBackground">@android:color/white</item>
-        <item name="android:textColorSecondary">@color/octo_blue_light</item>
+    <style name="settings_list.text">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
     </style>
 
-    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorPrimaryDark">@color/octo_blue_dark</item>
-        <item name="colorPrimary">@color/octo_blue</item>
-        <item name="colorAccent">@color/octo_blue_light</item>
-        <item name="android:windowBackground">@android:color/white</item>
-        <item name="android:textColorSecondary">@color/octo_blue_light</item>
+    <style name="settings_list.text.secondary">
+        <item name="android:alpha">0.54</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceListItemSecondary</item>
     </style>
 
+    <style name="settings_list.text.primary">
+        <item name="android:alpha">0.83</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceListItem</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="settings_list.cell">
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="separator">
+        <item name="android:background">@color/separator_color</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
 
 </resources>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/repetitionModeCellLayout"
+                style="@style/settings_list.cell">
+
+                <TextView
+                    style="@style/settings_list.text.primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/repetition_mode_settings_title" />
+
+                <TextView
+                    android:id="@+id/repetitionModeLabelTextView"
+                    style="@style/settings_list.text.secondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View style="@style/separator" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/durationCellLayout"
+                style="@style/settings_list.cell">
+
+                <TextView
+                    style="@style/settings_list.text.primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Durée du chronomètre " />
+
+                <TextView
+                    style="@style/settings_list.text.secondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="30s" />
+
+                <View style="@style/separator" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/octo_blue"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+</RelativeLayout>

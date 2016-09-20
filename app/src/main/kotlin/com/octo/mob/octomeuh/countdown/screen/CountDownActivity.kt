@@ -2,6 +2,7 @@ package com.octo.mob.octomeuh.countdown.screen
 
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -15,6 +16,7 @@ import com.octo.mob.octomeuh.countdown.model.CountDownValue
 import com.octo.mob.octomeuh.countdown.presenter.CountDownPresenter
 import com.octo.mob.octomeuh.countdown.presenter.UpsideDownPresenter
 import com.octo.mob.octomeuh.countdown.utils.HumanlyReadableDurationsConverter
+import com.octo.mob.octomeuh.settings.screen.SettingsActivity
 import com.octo.mob.octomeuh.transversal.AnalyticsManager
 import kotlinx.android.synthetic.main.activity_countdown.*
 import org.jetbrains.anko.browse
@@ -98,9 +100,9 @@ class CountDownActivity : AppCompatActivity(), CountDownScreen, RotatableScreen 
                 countDownPresenter.onActionFeedbackClicked()
                 return true
             }
-            R.id.action_play_mode -> {
-                val fragment = RepetitionModeDialogFragment()
-                fragment.show(supportFragmentManager, RepetitionModeDialogFragment::class.java.simpleName)
+            R.id.action_settings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
                 return true
             }
             else -> changeCountdownDurationIfPossible(item)
