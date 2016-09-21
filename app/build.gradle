@@ -2,7 +2,6 @@ apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'io.fabric'
 apply plugin: 'jacoco'
 apply plugin: 'com.github.triplet.play'
 apply from: '../scripts/git-verisioning.gradle'
@@ -11,13 +10,13 @@ def versionBuild = gitCountCommitLastTag()
 
 android {
 
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion "23.0.3"
 
     defaultConfig {
         applicationId "com.octo.mob.octomeuh"
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode versionMajor * 100000000 + versionMinor * 10000000 + versionPatch * 10000 + versionBuild
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
     }
@@ -67,9 +66,8 @@ dependencies {
     compile "com.android.support:support-annotations:$supportLibVersion"
     compile 'org.jetbrains.anko:anko-common:0.8.3'
 
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
-        transitive = true;
-    }
+    compile "com.google.firebase:firebase-core:$firebaseVersion"
+    compile "com.google.firebase:firebase-crash:$firebaseVersion"
 
     kapt 'com.google.dagger:dagger-compiler:2.4'
     compile 'com.google.dagger:dagger:2.4'
@@ -86,7 +84,6 @@ kapt {
 buildscript {
     repositories {
         mavenCentral()
-        maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
@@ -127,3 +124,5 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
         csv.enabled = false
     }
 }
+
+apply plugin: 'com.google.gms.google-services'
