@@ -15,7 +15,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
         classpath 'com.github.JakeWharton:sdk-manager-plugin:220bf7a88a7072df3ed16dc8466fb144f2817070'
-        classpath 'com.github.triplet.gradle:play-publisher:1.1.4'
+        classpath 'com.github.triplet.gradle:play-publisher:1.1.5'
         classpath 'com.google.gms:google-services:3.0.0'
     }
 }
