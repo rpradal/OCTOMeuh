@@ -3,6 +3,7 @@ package com.octo.mob.octomeuh.countdown.presenter
 import com.octo.mob.octomeuh.countdown.manager.PreferencesPersistor
 import com.octo.mob.octomeuh.countdown.model.RepetitionMode
 import com.octo.mob.octomeuh.countdown.screen.CountDownScreen
+import com.octo.mob.octomeuh.countdown.utils.AudioInformationProvider
 import com.octo.mob.octomeuh.countdown.utils.HumanlyReadableDurationsConverter
 import com.octo.mob.octomeuh.countdown.utils.SecondCountDownTimer
 import com.octo.mob.octomeuh.transversal.AnalyticsManager
@@ -18,6 +19,7 @@ class CountDownPresenterImplTest() {
     lateinit var mockAnalyticsManager: AnalyticsManager
     lateinit var mockPreferencesPersistor : PreferencesPersistor
     lateinit var mockHumanlyReadableDurationsConverter: HumanlyReadableDurationsConverter
+    lateinit var mockAudioInformationProvider: AudioInformationProvider
     lateinit var countDownPresenter: CountDownPresenterImpl
 
     @Before
@@ -26,10 +28,11 @@ class CountDownPresenterImplTest() {
         mockAnalyticsManager = mock(AnalyticsManager::class.java)
         mockPreferencesPersistor = mock(PreferencesPersistor::class.java)
         mockHumanlyReadableDurationsConverter = mock(HumanlyReadableDurationsConverter::class.java)
+        mockAudioInformationProvider = mock(AudioInformationProvider::class.java)
 
         Mockito.`when`(mockHumanlyReadableDurationsConverter.getCompactReadableStringFromValueInSeconds(Mockito.anyInt())).thenReturn("42s")
 
-        countDownPresenter = CountDownPresenterImpl(mockAnalyticsManager, mockHumanlyReadableDurationsConverter, mockPreferencesPersistor)
+        countDownPresenter = CountDownPresenterImpl(mockAnalyticsManager, mockHumanlyReadableDurationsConverter, mockPreferencesPersistor, mockAudioInformationProvider)
     }
 
     @Test
@@ -213,7 +216,31 @@ class CountDownPresenterImplTest() {
         verify(mockAnalyticsManager).logSendFeedback()
     }
 
+    @Test
+    fun testOnScreenFirstDisplayed_WhenSoundIsMuted_ShouldDisplayMessage() {
+        // Given
+        countDownPresenter.screen = mockCountDownScreen
+        Mockito.`when`(mockAudioInformationProvider.isSoundMuted()).thenReturn(true)
 
+        // When
+        countDownPresenter.onScreenFirstDisplay()
+
+        // Then
+        Mockito.verify(mockCountDownScreen).displaySoundMutedMessage()
+    }
+
+    @Test
+    fun testOnScreenFirstDisplayed_WhenSoundIsNotMuted_NothingShouldHappen() {
+        // Given
+        countDownPresenter.screen = mockCountDownScreen
+        Mockito.`when`(mockAudioInformationProvider.isSoundMuted()).thenReturn(false)
+
+        // When
+        countDownPresenter.onScreenFirstDisplay()
+
+        // Then
+        Mockito.verifyZeroInteractions(mockCountDownScreen)
+    }
 
 
 }

@@ -7,10 +7,9 @@
     <string name="next_speaker">Participant suivant</string>
     <string name="total_elapsed_time">Temps total écoulé</string>
     <string name="speaker_counter">Nombre de personnes ayant parlé</string>
+    <string name="muted_audio_warning_message">Le son est désactivé. Réactivez-le pour avoir un avertissement sonore à la fin du chrono</string>
 
-    <string name="action_edit_countdown_per_attendee">Modifier la durée par participant</string>
     <string name="action_give_feedback">Donner son avis sur l\'application</string>
-    <string name="action_change_loop_mode">Changement du mode répétation</string>
 
     <!-- Settings-->
     <string name="settings">Paramètres</string>

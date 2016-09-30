@@ -26,4 +26,6 @@ interface CountDownScreen {
     fun sendFeedbackEmailAction()
 
     fun keepAwake(shouldKeepAwake: Boolean)
+
+    fun displaySoundMutedMessage()
 }

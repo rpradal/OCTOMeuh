@@ -13,5 +13,7 @@ interface CountDownPresenter : BasePresenter<CountDownScreen>{
     fun getInitialCountDownValue(): Int
 
     fun onActionFeedbackClicked()
+
+    fun onScreenFirstDisplay()
 }
 

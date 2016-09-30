@@ -1,10 +1,13 @@
 package com.octo.mob.octomeuh.countdown.injection
 
+import android.media.AudioManager
 import com.octo.mob.octomeuh.countdown.manager.PreferencesPersistor
 import com.octo.mob.octomeuh.countdown.presenter.CountDownPresenter
 import com.octo.mob.octomeuh.countdown.presenter.CountDownPresenterImpl
 import com.octo.mob.octomeuh.countdown.presenter.UpsideDownPresenter
 import com.octo.mob.octomeuh.countdown.presenter.UpsideDownPresenterImpl
+import com.octo.mob.octomeuh.countdown.utils.AudioInformationProvider
+import com.octo.mob.octomeuh.countdown.utils.AudioInformationProviderImpl
 import com.octo.mob.octomeuh.countdown.utils.HumanlyReadableDurationsConverter
 import com.octo.mob.octomeuh.transversal.AnalyticsManager
 import dagger.Module
@@ -17,12 +20,22 @@ class CountdownModule {
     @CountDownScope
     fun providesCountDownPresenter(analyticsManager: AnalyticsManager,
                                    preferencesPersistor: PreferencesPersistor,
-                                   humanlyReadableDurationsConverter: HumanlyReadableDurationsConverter): CountDownPresenter {
-        return CountDownPresenterImpl(analyticsManager, humanlyReadableDurationsConverter, preferencesPersistor)
+                                   humanlyReadableDurationsConverter: HumanlyReadableDurationsConverter,
+                                   audioInformationProvider: AudioInformationProvider): CountDownPresenter {
+        return CountDownPresenterImpl(analyticsManager,
+                humanlyReadableDurationsConverter,
+                preferencesPersistor,
+                audioInformationProvider)
     }
 
     @Provides
     @CountDownScope
     fun providesUpsideDownPresenter(): UpsideDownPresenter = UpsideDownPresenterImpl()
+
+    @Provides
+    @CountDownScope
+    fun providesAudioInformationProvider(audioManager: AudioManager) : AudioInformationProvider {
+        return AudioInformationProviderImpl(audioManager)
+    }
 
 }
