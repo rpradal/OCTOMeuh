@@ -1,7 +1,9 @@
 package com.octo.mob.octomeuh.transversal.injection
 
 import android.app.Application
+import android.content.Context
 import android.content.SharedPreferences
+import android.media.AudioManager
 import android.preference.PreferenceManager
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.octo.mob.octomeuh.countdown.manager.PreferencesPersistor
@@ -37,4 +39,6 @@ class AppModule(private val application: Application) {
     @Singleton
     fun providesHumanDurationConverter(): HumanlyReadableDurationsConverter = HumanlyReadableDurationsConverterImpl()
 
+    @Provides
+    fun providesAudioManager(): AudioManager = application.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 }

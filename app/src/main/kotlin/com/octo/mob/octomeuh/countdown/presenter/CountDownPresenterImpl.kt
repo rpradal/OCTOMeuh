@@ -4,6 +4,7 @@ import android.os.CountDownTimer
 import com.octo.mob.octomeuh.countdown.manager.PreferencesPersistor
 import com.octo.mob.octomeuh.countdown.model.RepetitionMode
 import com.octo.mob.octomeuh.countdown.screen.CountDownScreen
+import com.octo.mob.octomeuh.countdown.utils.AudioInformationProvider
 import com.octo.mob.octomeuh.countdown.utils.CountDownListener
 import com.octo.mob.octomeuh.countdown.utils.HumanlyReadableDurationsConverter
 import com.octo.mob.octomeuh.countdown.utils.SecondCountDownTimer
@@ -13,7 +14,8 @@ import com.octo.mob.octomeuh.transversal.withNullable
 
 open class CountDownPresenterImpl(val analyticsManager: AnalyticsManager,
                                   val humanlyReadableDurationsConverter: HumanlyReadableDurationsConverter,
-                                  val preferencesPersistor: PreferencesPersistor) : CountDownPresenter,
+                                  val preferencesPersistor: PreferencesPersistor,
+                                  val audioInformationProvider: AudioInformationProvider) : CountDownPresenter,
         CountDownListener,
         BasePresenterImpl<CountDownScreen>() {
 
@@ -90,6 +92,12 @@ open class CountDownPresenterImpl(val analyticsManager: AnalyticsManager,
     override fun onActionFeedbackClicked() {
         analyticsManager.logSendFeedback()
         screen?.sendFeedbackEmailAction()
+    }
+
+    override fun onScreenFirstDisplay() {
+        if (audioInformationProvider.isSoundMuted()) {
+            screen?.displaySoundMutedMessage()
+        }
     }
 
     // ---------------------------------

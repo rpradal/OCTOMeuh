@@ -12,10 +12,9 @@
     <string name="next_speaker">Next speaker</string>
     <string name="total_elapsed_time">Total elapsed time</string>
     <string name="speaker_counter">Speaker counter</string>
+    <string name="muted_audio_warning_message">Sound is muted. Unmute it to be warned when a countdown ends</string>
 
-    <string name="action_edit_countdown_per_attendee">Edit countdown duration per attendee</string>
     <string name="action_give_feedback">Give a feedback concerning the app</string>
-    <string name="action_change_loop_mode">Change repetition mode</string>
 
     <!-- Settings -->
     <string name="settings">Settings</string>

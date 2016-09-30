@@ -4,9 +4,11 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.SystemClock
+import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.*
@@ -56,17 +58,22 @@ class CountDownActivity : AppCompatActivity(), CountDownScreen, RotatableScreen 
         mediaPlayer = MediaPlayer.create(this, R.raw.cow_sound)
         orientationEventListener = UpsideDownEventListener(this, upsideDownPresenter)
 
+        countDownPresenter.attach(this)
+        countDownPresenter.onScreenFirstDisplay()
+
         initOnClickListeners()
     }
 
     override fun onResume() {
         super.onResume()
+        volumeControlStream = AudioManager.STREAM_MUSIC
         orientationEventListener.enable()
         countDownPresenter.attach(this)
         upsideDownPresenter.attach(this)
     }
 
     override fun onStop() {
+        volumeControlStream = AudioManager.USE_DEFAULT_STREAM_TYPE
         orientationEventListener.disable()
         countDownPresenter.detach()
         upsideDownPresenter.detach()
@@ -153,6 +160,10 @@ class CountDownActivity : AppCompatActivity(), CountDownScreen, RotatableScreen 
         mediaPlayer.start()
     }
 
+    override fun displaySoundMutedMessage() {
+        Snackbar.make(toolbar, R.string.muted_audio_warning_message, Snackbar.LENGTH_LONG).show()
+    }
+
     override fun keepAwake(shouldKeepAwake: Boolean) {
         val keepAwakeFlag = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
 
@@ -170,7 +181,7 @@ class CountDownActivity : AppCompatActivity(), CountDownScreen, RotatableScreen 
     private fun initOnClickListeners() {
         startTimerButton.setOnClickListener { countDownPresenter.startTimer() }
         nextSpeakerButton.setOnClickListener { countDownPresenter.onNewSpeakerCountDown() }
-        logoImageView.setOnClickListener (LogoClickListener())
+        logoImageView.setOnClickListener(LogoClickListener())
         stopTimerButton.setOnClickListener { countDownPresenter.onCancelMeeting() }
         octoPoweredImageView.setOnClickListener {
             analyticsManager.logOctoPoweredClick()
