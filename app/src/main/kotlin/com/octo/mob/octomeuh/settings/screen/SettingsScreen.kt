@@ -10,4 +10,8 @@ interface SettingsScreen {
 
     fun showCurrentRepetitionMode(repetitionModeDescription: RepetitionModeDescription)
 
+    fun showCurrentDuration(initialDuration: String)
+
+    fun showVersionNumber(appVersionLabel: String)
+
 }

@@ -2,6 +2,7 @@ package com.octo.mob.octomeuh.transversal.injection
 
 import com.octo.mob.octomeuh.OctoMeuhApplication
 import com.octo.mob.octomeuh.countdown.manager.PreferencesPersistor
+import com.octo.mob.octomeuh.countdown.utils.HumanlyReadableDurationsConverter
 import com.octo.mob.octomeuh.transversal.AnalyticsManager
 import dagger.Component
 import javax.inject.Singleton
@@ -12,8 +13,9 @@ interface AppComponent {
 
     fun inject(octoMeuhApplication: OctoMeuhApplication)
 
-    fun analyticsManager() : AnalyticsManager
-    fun preferencePersistor() : PreferencesPersistor
+    fun analyticsManager(): AnalyticsManager
+    fun preferencePersistor(): PreferencesPersistor
+    fun humanlyReadableDurationConverter(): HumanlyReadableDurationsConverter
 
     companion object Initializer {
 

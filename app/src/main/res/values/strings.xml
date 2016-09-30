@@ -25,6 +25,8 @@
     <string name="loop_mode_description"><![CDATA[<br/><b>AUTOMATIC</b><br/><small>When the speech duration of a speaker is elapsed, the next speaker countdown starts automatically<small><br/>]]></string>
     <string name="step_by_step_mode_title">Manual</string>
     <string name="step_by_step_mode_description"><![CDATA[<b>MANUAL</b><br/><small>When the speech duration of a speaker is elapsed, a manual action is required before the next speaker countdown starts<small><br/>]]></string>
-
+    <string name="save">Save</string>
+    <string name="duration_selector_title">Select duration</string>
+    <string name="version">Version</string>
 
 </resources>

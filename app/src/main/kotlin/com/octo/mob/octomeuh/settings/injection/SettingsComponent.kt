@@ -1,6 +1,7 @@
 package com.octo.mob.octomeuh.settings.injection
 
 import com.octo.mob.octomeuh.OctoMeuhApplication
+import com.octo.mob.octomeuh.settings.screen.DurationPickerDialogFragment
 import com.octo.mob.octomeuh.settings.screen.SettingsActivity
 import com.octo.mob.octomeuh.transversal.injection.AppComponent
 import dagger.Component
@@ -10,6 +11,7 @@ import javax.inject.Scope
 @SettingsScope
 interface SettingsComponent {
     fun inject(settingsActivity: SettingsActivity)
+    fun inject(durationPickerDialogFragment: DurationPickerDialogFragment)
 
     companion object Initializer {
         fun init(): SettingsComponent {
@@ -20,6 +22,7 @@ interface SettingsComponent {
                     .build()
         }
     }
+
 
 }
 

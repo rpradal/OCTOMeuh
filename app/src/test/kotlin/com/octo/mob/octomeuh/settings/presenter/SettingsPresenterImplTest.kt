@@ -2,8 +2,10 @@ package com.octo.mob.octomeuh.settings.presenter
 
 import com.octo.mob.octomeuh.countdown.manager.PreferencesPersistor
 import com.octo.mob.octomeuh.countdown.model.RepetitionMode
+import com.octo.mob.octomeuh.countdown.utils.HumanlyReadableDurationsConverter
 import com.octo.mob.octomeuh.settings.model.RepetitionModeDescription
 import com.octo.mob.octomeuh.settings.screen.SettingsScreen
+import com.octo.mob.octomeuh.settings.utils.AppInformation
 import org.junit.Before
 import org.junit.Test
 
@@ -14,17 +16,23 @@ import org.mockito.MockitoAnnotations
 class SettingsPresenterImplTest {
 
     @Mock
-    lateinit var preferencePersistor : PreferencesPersistor
+    lateinit var preferencePersistor: PreferencesPersistor
 
     @Mock
-    lateinit var settingsScreen : SettingsScreen
+    lateinit var settingsScreen: SettingsScreen
 
-    lateinit var settingsPresenter : SettingsPresenterImpl
+    @Mock
+    lateinit var appInformation: AppInformation
+
+    @Mock
+    lateinit var humanlyReadablenformation: HumanlyReadableDurationsConverter
+
+    lateinit var settingsPresenter: SettingsPresenterImpl
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        settingsPresenter = SettingsPresenterImpl(preferencePersistor)
+        settingsPresenter = SettingsPresenterImpl(preferencePersistor, humanlyReadablenformation, appInformation)
     }
 
     @Test

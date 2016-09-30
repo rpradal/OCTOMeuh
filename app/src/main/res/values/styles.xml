@@ -6,6 +6,7 @@
         <item name="android:paddingRight">16dp</item>
         <item name="android:paddingStart">16dp</item>
         <item name="android:paddingEnd">16dp</item>
+        <item name="android:maxLines">1</item>
     </style>
 
     <style name="settings_list.text.secondary">
@@ -21,13 +22,14 @@
         <item name="android:textColor">@android:color/black</item>
     </style>
 
-    <style name="settings_list.cell">
+    <style name="settings_list.selectable_cell">
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:clickable">true</item>
         <item name="android:orientation">vertical</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
 
     <style name="separator">
         <item name="android:background">@color/separator_color</item>

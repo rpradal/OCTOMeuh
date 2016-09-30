@@ -1,18 +1,21 @@
 package com.octo.mob.octomeuh.settings.screen
 
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.text.Html
 import android.view.MenuItem
 import com.octo.mob.octomeuh.R
 import com.octo.mob.octomeuh.settings.injection.SettingsComponent
 import com.octo.mob.octomeuh.settings.model.RepetitionModeDescription
 import com.octo.mob.octomeuh.settings.presenter.SettingsPresenter
+import com.octo.mob.octomeuh.settings.utils.RepetitionModeDialogCreator
 import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
 
 class SettingsActivity : AppCompatActivity(), SettingsScreen {
+
+    @Inject
+    lateinit var repetitionModeDialogCreator : RepetitionModeDialogCreator
 
     @Inject
     lateinit var presenter: SettingsPresenter
@@ -54,23 +57,31 @@ class SettingsActivity : AppCompatActivity(), SettingsScreen {
         }
     }
 
+    override fun showVersionNumber(appVersionLabel: String) {
+        versionNumberTextView.text = appVersionLabel
+    }
+
     override fun showRepetitionModeSelection(values: Array<RepetitionModeDescription>, selectionIndex: Int) {
-        val builder = AlertDialog.Builder(this, R.style.AppTheme_Dialog)
-        builder.setTitle(R.string.repetition_mode_selector_title)
-        val map = values.map { element -> Html.fromHtml(resources.getString(element.descriptionRes)) }
-        builder.setSingleChoiceItems(map.toTypedArray(), selectionIndex) {
-            dialog, which ->
-            presenter.onRepetitionModeSelected(values[which])
-            dialog.dismiss()
-        }
-        builder.setNegativeButton(android.R.string.cancel, { dialogInterface, i -> })
-        builder.create().show()
+        val repetitionModeDialog = repetitionModeDialogCreator.getRepetitionModeDialog(values, selectionIndex, this)
+        repetitionModeDialog.show()
     }
 
     override fun showDurationSelection() {
+        val fragment = DurationPickerDialogFragment()
+        fragment.onDismissListener = object : DurationPickerDialogFragment.OnDismissListener {
+            override fun onDismiss() {
+                presenter.onDurationChanged()
+            }
+        }
+        fragment.show(supportFragmentManager, DurationPickerDialogFragment::class.java.simpleName)
     }
 
     override fun showCurrentRepetitionMode(repetitionModeDescription: RepetitionModeDescription) {
         repetitionModeLabelTextView.setText(repetitionModeDescription.titleRes)
     }
+
+    override fun showCurrentDuration(initialDuration: String) {
+        durationTextView.text = initialDuration
+    }
+
 }

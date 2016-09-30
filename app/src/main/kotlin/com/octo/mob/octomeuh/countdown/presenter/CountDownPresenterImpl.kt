@@ -2,16 +2,17 @@ package com.octo.mob.octomeuh.countdown.presenter
 
 import android.os.CountDownTimer
 import com.octo.mob.octomeuh.countdown.manager.PreferencesPersistor
-import com.octo.mob.octomeuh.countdown.model.CountDownValue
 import com.octo.mob.octomeuh.countdown.model.RepetitionMode
 import com.octo.mob.octomeuh.countdown.screen.CountDownScreen
 import com.octo.mob.octomeuh.countdown.utils.CountDownListener
+import com.octo.mob.octomeuh.countdown.utils.HumanlyReadableDurationsConverter
 import com.octo.mob.octomeuh.countdown.utils.SecondCountDownTimer
 import com.octo.mob.octomeuh.transversal.AnalyticsManager
 import com.octo.mob.octomeuh.transversal.BasePresenterImpl
 import com.octo.mob.octomeuh.transversal.withNullable
 
 open class CountDownPresenterImpl(val analyticsManager: AnalyticsManager,
+                                  val humanlyReadableDurationsConverter: HumanlyReadableDurationsConverter,
                                   val preferencesPersistor: PreferencesPersistor) : CountDownPresenter,
         CountDownListener,
         BasePresenterImpl<CountDownScreen>() {
@@ -20,7 +21,6 @@ open class CountDownPresenterImpl(val analyticsManager: AnalyticsManager,
     // ATTRIBUTES
     // ---------------------------------
 
-    internal var initialCountDownValue = preferencesPersistor.getInitialDuration()
     internal var countDownTimer: CountDownTimer? = null
     internal var speakerCounter = 0
 
@@ -33,7 +33,7 @@ open class CountDownPresenterImpl(val analyticsManager: AnalyticsManager,
             setTimerVisibility(true)
 
             setStopAvailability(true)
-            setTimerValue(initialCountDownValue.durationInSeconds)
+            setTimerValue(humanlyReadableDurationsConverter.getCompactReadableStringFromValueInSeconds(getInitialCountDownValue()))
 
             setNextAttendeeVisibility(true)
             setStartVisibility(false)
@@ -53,14 +53,8 @@ open class CountDownPresenterImpl(val analyticsManager: AnalyticsManager,
         increaseSpeakerCounter()
     }
 
-    override fun setInitialCountDownValue(selectedValue: CountDownValue) {
-        analyticsManager.logChangeCountDownDuration(selectedValue.durationInSeconds)
-        preferencesPersistor.saveInitialDuration(selectedValue)
-        initialCountDownValue = selectedValue
-    }
-
-    override fun getInitialCountDownValue(): CountDownValue {
-        return initialCountDownValue
+    override fun getInitialCountDownValue(): Int {
+        return preferencesPersistor.getInitialDuration()
     }
 
     override fun onCountDownOver() {
@@ -73,7 +67,7 @@ open class CountDownPresenterImpl(val analyticsManager: AnalyticsManager,
     }
 
     override fun onValueUpdated(countValueInSeconds: Long) {
-        screen?.setTimerValue(countValueInSeconds.toInt())
+        screen?.setTimerValue(humanlyReadableDurationsConverter.getCompactReadableStringFromValueInSeconds(countValueInSeconds.toInt()))
     }
 
     override fun onCancelMeeting() {
@@ -102,7 +96,7 @@ open class CountDownPresenterImpl(val analyticsManager: AnalyticsManager,
     // INTERNAL METHODS
     // ---------------------------------
 
-    open internal fun generateNewSecondsTimer() = SecondCountDownTimer(initialCountDownValue.durationInSeconds, this)
+    open internal fun generateNewSecondsTimer() = SecondCountDownTimer(getInitialCountDownValue(), this)
 
     open internal fun restartTimer() {
         screen?.switchTimerToNormalMode()

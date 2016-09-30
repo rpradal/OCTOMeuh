@@ -10,5 +10,7 @@ interface SettingsPresenter : BasePresenter<SettingsScreen> {
     fun onRepetitionModeChangeRequest()
 
     fun onRepetitionModeSelected(repetitionModeDescription: RepetitionModeDescription)
+
+    fun onDurationChanged()
 }
 

@@ -6,7 +6,6 @@ import com.octo.mob.octomeuh.countdown.presenter.CountDownPresenterImpl
 import com.octo.mob.octomeuh.countdown.presenter.UpsideDownPresenter
 import com.octo.mob.octomeuh.countdown.presenter.UpsideDownPresenterImpl
 import com.octo.mob.octomeuh.countdown.utils.HumanlyReadableDurationsConverter
-import com.octo.mob.octomeuh.countdown.utils.HumanlyReadableDurationsConverterImpl
 import com.octo.mob.octomeuh.transversal.AnalyticsManager
 import dagger.Module
 import dagger.Provides
@@ -16,15 +15,14 @@ class CountdownModule {
 
     @Provides
     @CountDownScope
-    fun providesCountDownPresenter(analyticsManager: AnalyticsManager, preferencesPersistor: PreferencesPersistor): CountDownPresenter {
-        return CountDownPresenterImpl(analyticsManager, preferencesPersistor)
+    fun providesCountDownPresenter(analyticsManager: AnalyticsManager,
+                                   preferencesPersistor: PreferencesPersistor,
+                                   humanlyReadableDurationsConverter: HumanlyReadableDurationsConverter): CountDownPresenter {
+        return CountDownPresenterImpl(analyticsManager, humanlyReadableDurationsConverter, preferencesPersistor)
     }
 
     @Provides
     @CountDownScope
     fun providesUpsideDownPresenter(): UpsideDownPresenter = UpsideDownPresenterImpl()
 
-    @Provides
-    @CountDownScope
-    fun providesHumanDurationConverter(): HumanlyReadableDurationsConverter = HumanlyReadableDurationsConverterImpl()
 }

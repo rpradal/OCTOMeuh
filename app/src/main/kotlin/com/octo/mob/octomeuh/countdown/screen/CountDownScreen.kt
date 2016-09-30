@@ -3,7 +3,7 @@ package com.octo.mob.octomeuh.countdown.screen
 interface CountDownScreen {
     fun setStopAvailability(isStopAvailable: Boolean)
 
-    fun setTimerValue(timerValueInSeconds: Int)
+    fun setTimerValue(timerValue: String)
 
     fun switchTimerToFinishedMode()
 
