@@ -4,10 +4,10 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.support.v7.app.AlertDialog
-import android.text.Html
 import com.octo.mob.octomeuh.R
 import com.octo.mob.octomeuh.settings.model.RepetitionModeDescription
 import com.octo.mob.octomeuh.settings.presenter.SettingsPresenter
+import com.octo.mob.octomeuh.transversal.toHtml
 
 interface RepetitionModeDialogCreator {
     fun getRepetitionModeDialog(values: Array<RepetitionModeDescription>,
@@ -23,7 +23,7 @@ class RepetitionModeDialogCreatorImpl(val settingsPresenter: SettingsPresenter) 
 
         val builder = AlertDialog.Builder(context, R.style.AppTheme_Dialog)
         builder.setTitle(R.string.repetition_mode_selector_title)
-        val map = values.map { element -> Html.fromHtml(context.resources.getString(element.descriptionRes)) }
+        val map = values.map { element -> context.resources.getString(element.descriptionRes).toHtml() }
         builder.setSingleChoiceItems(map.toTypedArray(), selectionIndex, DurationChoiceListener(values))
         builder.setNegativeButton(android.R.string.cancel, { dialogInterface, i -> })
         return builder.create()
