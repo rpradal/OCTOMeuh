@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -64,8 +63,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/material_margin_small"
-                    android:text="@string/stop_chrono"
-                    android:enabled="false"/>
+                    android:enabled="false"
+                    android:text="@string/stop_chrono" />
 
             </RelativeLayout>
 
@@ -116,11 +115,7 @@
             android:orientation="vertical"
             android:visibility="invisible">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/separator_color" />
-
+            <View style="@style/separator" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -135,23 +130,23 @@
                     android:layout_height="32dp"
                     android:layout_marginEnd="@dimen/material_margin_medium"
                     android:layout_marginRight="@dimen/material_margin_medium"
-                    android:src="@drawable/ic_access_time_black_24dp"
-                    android:contentDescription="@string/total_elapsed_time"/>
+                    android:contentDescription="@string/total_elapsed_time"
+                    android:src="@drawable/ic_access_time_black_24dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/chronoImageView"
-                    android:layout_toRightOf="@id/chronoImageView"
                     android:layout_marginEnd="@dimen/material_margin_medium"
+                    android:layout_marginRight="@dimen/material_margin_medium"
+                    android:layout_toEndOf="@id/chronoImageView"
+                    android:layout_toLeftOf="@+id/elapsedTimeChronometer"
+                    android:layout_toRightOf="@id/chronoImageView"
+                    android:layout_toStartOf="@+id/elapsedTimeChronometer"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:layout_toStartOf="@+id/elapsedTimeChronometer"
                     android:text="@string/total_elapsed_time"
-                    android:textColor="@android:color/black"
-                    android:layout_marginRight="@dimen/material_margin_medium"
-                    android:layout_toLeftOf="@+id/elapsedTimeChronometer" />
+                    android:textColor="@android:color/black" />
 
                 <Chronometer
                     android:id="@+id/elapsedTimeChronometer"
@@ -165,10 +160,8 @@
             </RelativeLayout>
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/material_margin_medium"
-                android:background="@color/separator_color" />
+                style="@style/separator"
+                android:layout_marginTop="@dimen/material_margin_medium" />
 
 
             <RelativeLayout
@@ -184,23 +177,23 @@
                     android:layout_height="32dp"
                     android:layout_marginEnd="@dimen/material_margin_medium"
                     android:layout_marginRight="@dimen/material_margin_medium"
-                    android:src="@drawable/ic_attendee_number_black_24dp"
-                    android:contentDescription="@string/speaker_counter" />
+                    android:contentDescription="@string/speaker_counter"
+                    android:src="@drawable/ic_attendee_number_black_24dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/material_margin_medium"
+                    android:layout_marginRight="@dimen/material_margin_medium"
                     android:layout_toEndOf="@id/totalSpeakersImageView"
+                    android:layout_toLeftOf="@+id/totalSpeakersTextView"
                     android:layout_toRightOf="@id/totalSpeakersImageView"
                     android:layout_toStartOf="@+id/totalSpeakersTextView"
-                    android:layout_marginEnd="@dimen/material_margin_medium"
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:text="@string/speaker_counter"
-                    android:textColor="@android:color/black"
-                    android:layout_toLeftOf="@+id/totalSpeakersTextView"
-                    android:layout_marginRight="@dimen/material_margin_medium" />
+                    android:textColor="@android:color/black" />
 
                 <TextView
                     android:id="@+id/totalSpeakersTextView"
@@ -220,12 +213,6 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/octo_blue"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <include layout="@layout/toolbar" />
 
 </RelativeLayout>

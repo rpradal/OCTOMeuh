@@ -2,6 +2,7 @@ package com.octo.mob.octomeuh.countdown.screen
 
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -11,12 +12,12 @@ import android.support.v7.app.AppCompatActivity
 import android.view.*
 import com.octo.mob.octomeuh.R
 import com.octo.mob.octomeuh.countdown.injection.CountDownComponent
-import com.octo.mob.octomeuh.countdown.model.CountDownValue
 import com.octo.mob.octomeuh.countdown.presenter.CountDownPresenter
 import com.octo.mob.octomeuh.countdown.presenter.UpsideDownPresenter
-import com.octo.mob.octomeuh.countdown.utils.HumanlyReadableDurationsConverter
+import com.octo.mob.octomeuh.settings.screen.SettingsActivity
 import com.octo.mob.octomeuh.transversal.AnalyticsManager
 import kotlinx.android.synthetic.main.activity_countdown.*
+import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.browse
 import org.jetbrains.anko.email
 import javax.inject.Inject
@@ -28,7 +29,7 @@ class CountDownActivity : AppCompatActivity(), CountDownScreen, RotatableScreen 
     // ---------------------------------
 
     private lateinit var orientationEventListener: UpsideDownEventListener
-    lateinit var mediaPlayer: MediaPlayer;
+    lateinit var mediaPlayer: MediaPlayer
 
     @Inject
     lateinit var upsideDownPresenter: UpsideDownPresenter
@@ -38,9 +39,6 @@ class CountDownActivity : AppCompatActivity(), CountDownScreen, RotatableScreen 
 
     @Inject
     lateinit var countDownPresenter: CountDownPresenter
-
-    @Inject
-    lateinit var humanDurationConverter: HumanlyReadableDurationsConverter
 
     // ---------------------------------
     // LIFECYCLE
@@ -75,20 +73,8 @@ class CountDownActivity : AppCompatActivity(), CountDownScreen, RotatableScreen 
         super.onStop()
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        val doneDrawable = ContextCompat.getDrawable(this, R.drawable.ic_done_black_24dp)
-        countDownPresenter.getInitialCountDownValue()
-
-        menu?.findItem(countDownPresenter.getInitialCountDownValue().menuResourceId)?.icon = doneDrawable
-        return super.onPrepareOptionsMenu(menu)
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.countdown, menu)
-
-        val subMenu = menu?.findItem(R.id.action_edit_countdown_per_atendee)?.subMenu
-        inflateSubmenuWithCountdownDurations(subMenu)
-
         return true
     }
 
@@ -96,14 +82,14 @@ class CountDownActivity : AppCompatActivity(), CountDownScreen, RotatableScreen 
         return when (item?.itemId) {
             R.id.action_feedback -> {
                 countDownPresenter.onActionFeedbackClicked()
-                return true
+                true
             }
-            R.id.action_play_mode -> {
-                val fragment = RepetitionModeDialogFragment()
-                fragment.show(supportFragmentManager, RepetitionModeDialogFragment::class.java.simpleName)
-                return true
+            R.id.action_settings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                true
             }
-            else -> changeCountdownDurationIfPossible(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -123,8 +109,8 @@ class CountDownActivity : AppCompatActivity(), CountDownScreen, RotatableScreen 
         nextSpeakerButton.visibility = if (nextAtendeeVisibility) View.VISIBLE else View.GONE
     }
 
-    override fun setTimerValue(timerValueInSeconds: Int) {
-        timerTextView.text = humanDurationConverter.getCompactReadableStringFromValueInSeconds(timerValueInSeconds)
+    override fun setTimerValue(timerValue: String) {
+        timerTextView.text = timerValue
     }
 
     override fun switchTimerToFinishedMode() {
@@ -189,24 +175,6 @@ class CountDownActivity : AppCompatActivity(), CountDownScreen, RotatableScreen 
         octoPoweredImageView.setOnClickListener {
             analyticsManager.logOctoPoweredClick()
             browse(getString(R.string.url_octo))
-        }
-    }
-
-    private fun changeCountdownDurationIfPossible(item: MenuItem?): Boolean {
-        val selectedValue = CountDownValue.values().find { it.menuResourceId == item?.itemId }
-
-        selectedValue?.let {
-            countDownPresenter.setInitialCountDownValue(selectedValue)
-            invalidateOptionsMenu()
-            true
-        }
-
-        return false
-    }
-
-    private fun inflateSubmenuWithCountdownDurations(subMenu: SubMenu?) {
-        CountDownValue.values().forEach {
-            subMenu?.add(Menu.NONE, it.menuResourceId, 0, humanDurationConverter.getReadableStringFromValueInSeconds(it.durationInSeconds))
         }
     }
 

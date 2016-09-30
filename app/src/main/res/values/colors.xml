@@ -5,4 +5,7 @@
     <color name="octo_blue_light">#00a9c5</color>
 
     <color name="separator_color">#1f000000</color>
+
+    <color name="defaultLineColor">@color/octo_blue_light</color>
+    <color name="defaultSubLineColor">#7f8c8d</color>
 </resources>

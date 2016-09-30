@@ -1,14 +1,13 @@
 package com.octo.mob.octomeuh.countdown.manager
 
 import android.content.SharedPreferences
-import com.octo.mob.octomeuh.countdown.model.CountDownValue
 import com.octo.mob.octomeuh.countdown.model.RepetitionMode
 import java.util.*
 
 interface PreferencesPersistor {
-    fun saveInitialDuration(countDownValue: CountDownValue)
+    fun saveInitialDuration(initialDurationSeconds: Int)
 
-    fun getInitialDuration(): CountDownValue
+    fun getInitialDuration(): Int
 
     fun getRepetitionMode(): RepetitionMode
 
@@ -24,7 +23,7 @@ class PreferencesPersistorImpl(val sharedPreferences: SharedPreferences) : Prefe
     companion object {
         internal val INITIAL_DURATION_KEY = "INITIAL_DURATION_KEY"
         internal val REPETITION_MODE_KEY = "REPETITION_MODE_KEY"
-        internal val DEFAULT_COUNTDOWN_VALUE = CountDownValue.ONE_MINUTE
+        internal val DEFAULT_COUNTDOWN_DURATION_SECONDS = 60
         internal val DEFAULT_REPETITION_MODE = RepetitionMode.STEP_BY_STEP
     }
 
@@ -32,13 +31,17 @@ class PreferencesPersistorImpl(val sharedPreferences: SharedPreferences) : Prefe
     // INTERFACE IMPLEM
     // ---------------------------------
 
-    override fun getInitialDuration(): CountDownValue {
-        return extractEnumValue(CountDownValue.values(), INITIAL_DURATION_KEY, DEFAULT_COUNTDOWN_VALUE)
+    override fun getInitialDuration(): Int {
+        try {
+            return sharedPreferences.getInt(INITIAL_DURATION_KEY, DEFAULT_COUNTDOWN_DURATION_SECONDS)
+        } catch (exception: ClassCastException) {
+            return DEFAULT_COUNTDOWN_DURATION_SECONDS
+        }
     }
 
-    override fun saveInitialDuration(countDownValue: CountDownValue) {
+    override fun saveInitialDuration(initialDurationSeconds: Int) {
         sharedPreferences.edit()
-                .putString(INITIAL_DURATION_KEY, countDownValue.name)
+                .putInt(INITIAL_DURATION_KEY, initialDurationSeconds)
                 .apply()
     }
 
@@ -68,5 +71,4 @@ class PreferencesPersistorImpl(val sharedPreferences: SharedPreferences) : Prefe
 
         return extractedValue
     }
-
 }

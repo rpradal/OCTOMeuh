@@ -12,12 +12,16 @@
     <string name="action_give_feedback">Donner son avis sur l\'application</string>
     <string name="action_change_loop_mode">Changement du mode répétation</string>
 
-    <!-- Repetition mode selector Screen -->
+    <!-- Settings-->
+    <string name="settings">Paramètres</string>
     <string name="repetition_mode_selector_title">Selection du mode de répétition</string>
-    <string name="loop_mode_title">AUTOMATIQUE</string>
-    <string name="loop_mode_description">Lorsque le temps d\'une personne est écoulée le timer passe automatiquement à la personne suivante</string>
-    <string name="step_by_step_mode_title">MANUEL</string>
-    <string name="step_by_step_mode_description">Lorsque le temps d\'une personne est écoulé une action est requise pour commencer le timer de la personne suivante</string>
-
+    <string name="repetition_mode_settings_title">Mode de répétition</string>
+    <string name="loop_mode_title">Automatique</string>
+    <string name="loop_mode_description"><![CDATA[<br/><b>AUTOMATIQUE</b><br/><small>Lorsque le temps d\'une personne est écoulée le timer passe automatiquement à la personne suivante<small><br/>]]></string>
+    <string name="step_by_step_mode_title">Manuel</string>
+    <string name="step_by_step_mode_description"><![CDATA[<b>MANUEL</b><br/><small>Lorsque le temps d\'une personne est écoulé une action est requise pour commencer le timer de la personne suivante<small><br/>]]></string>
+    <string name="save">Enregistrer</string>
+    <string name="duration_selector_title">Sélection de la durée entre deux répétitions</string>
+    <string name="version">Version</string>
 
 </resources>

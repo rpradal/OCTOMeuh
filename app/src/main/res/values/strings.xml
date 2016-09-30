@@ -17,12 +17,16 @@
     <string name="action_give_feedback">Give a feedback concerning the app</string>
     <string name="action_change_loop_mode">Change repetition mode</string>
 
-    <!-- Repetition mode selector Screen -->
+    <!-- Settings -->
+    <string name="settings">Settings</string>
     <string name="repetition_mode_selector_title">Select repetition mode</string>
-    <string name="loop_mode_title">AUTOMATIC</string>
-    <string name="loop_mode_description">When the speech duration of a speaker is elapsed, the next speaker countdown starts automatically</string>
-    <string name="step_by_step_mode_title">MANUAL</string>
-    <string name="step_by_step_mode_description">When the speech duration of a speaker is elapsed, a manual action is required before the next speaker countdown starts</string>
-
+    <string name="repetition_mode_settings_title">Repetition mode</string>
+    <string name="loop_mode_title">Automatic</string>
+    <string name="loop_mode_description"><![CDATA[<br/><b>AUTOMATIC</b><br/><small>When the speech duration of a speaker is elapsed, the next speaker countdown starts automatically<small><br/>]]></string>
+    <string name="step_by_step_mode_title">Manual</string>
+    <string name="step_by_step_mode_description"><![CDATA[<b>MANUAL</b><br/><small>When the speech duration of a speaker is elapsed, a manual action is required before the next speaker countdown starts<small><br/>]]></string>
+    <string name="save">Save</string>
+    <string name="duration_selector_title">Select duration</string>
+    <string name="version">Version</string>
 
 </resources>

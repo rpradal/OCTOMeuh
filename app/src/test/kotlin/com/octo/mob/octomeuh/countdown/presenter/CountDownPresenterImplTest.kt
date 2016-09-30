@@ -1,9 +1,9 @@
 package com.octo.mob.octomeuh.countdown.presenter
 
 import com.octo.mob.octomeuh.countdown.manager.PreferencesPersistor
-import com.octo.mob.octomeuh.countdown.model.CountDownValue
 import com.octo.mob.octomeuh.countdown.model.RepetitionMode
 import com.octo.mob.octomeuh.countdown.screen.CountDownScreen
+import com.octo.mob.octomeuh.countdown.utils.HumanlyReadableDurationsConverter
 import com.octo.mob.octomeuh.countdown.utils.SecondCountDownTimer
 import com.octo.mob.octomeuh.transversal.AnalyticsManager
 import org.junit.Assert
@@ -17,6 +17,7 @@ class CountDownPresenterImplTest() {
     lateinit var mockCountDownScreen: CountDownScreen
     lateinit var mockAnalyticsManager: AnalyticsManager
     lateinit var mockPreferencesPersistor : PreferencesPersistor
+    lateinit var mockHumanlyReadableDurationsConverter: HumanlyReadableDurationsConverter
     lateinit var countDownPresenter: CountDownPresenterImpl
 
     @Before
@@ -24,27 +25,19 @@ class CountDownPresenterImplTest() {
         mockCountDownScreen = mock(CountDownScreen::class.java)
         mockAnalyticsManager = mock(AnalyticsManager::class.java)
         mockPreferencesPersistor = mock(PreferencesPersistor::class.java)
-        countDownPresenter = CountDownPresenterImpl(mockAnalyticsManager, mockPreferencesPersistor)
-    }
+        mockHumanlyReadableDurationsConverter = mock(HumanlyReadableDurationsConverter::class.java)
 
-    @Test
-    fun testConstructor_InitialCountdownValueShouldBeTheOneProvidedByPreferencesPersistor() {
-        // Given
-        `when`(mockPreferencesPersistor.getInitialDuration()).thenReturn(CountDownValue.ONE_MINUTE_THIRTY_SECONDS)
+        Mockito.`when`(mockHumanlyReadableDurationsConverter.getCompactReadableStringFromValueInSeconds(Mockito.anyInt())).thenReturn("42s")
 
-        // When
-        val customCountDownPresenter = CountDownPresenterImpl(mockAnalyticsManager, mockPreferencesPersistor)
-
-        // Then
-        Assert.assertEquals(CountDownValue.ONE_MINUTE_THIRTY_SECONDS, customCountDownPresenter.initialCountDownValue)
+        countDownPresenter = CountDownPresenterImpl(mockAnalyticsManager, mockHumanlyReadableDurationsConverter, mockPreferencesPersistor)
     }
 
     @Test
     fun testStartTimer() {
         // Given
         val spyCountDownPresenter = Mockito.spy(countDownPresenter)
-        spyCountDownPresenter.initialCountDownValue = CountDownValue.FORTYFIVE_SECONDS
         doNothing().`when`(spyCountDownPresenter).restartTimer()
+        Mockito.`when`(mockPreferencesPersistor.getInitialDuration()).thenReturn(42)
         spyCountDownPresenter.screen = mockCountDownScreen
         spyCountDownPresenter.speakerCounter = 16
 
@@ -54,7 +47,7 @@ class CountDownPresenterImplTest() {
         // Then
         verify(mockCountDownScreen).setTimerVisibility(true)
         verify(mockCountDownScreen).setStopAvailability(true)
-        verify(mockCountDownScreen).setTimerValue(45)
+        verify(mockCountDownScreen).setTimerValue("42s")
         verify(mockCountDownScreen).setNextAttendeeVisibility(true)
         verify(mockCountDownScreen).setStartVisibility(false)
         verify(mockCountDownScreen).startChronometer()
@@ -186,7 +179,7 @@ class CountDownPresenterImplTest() {
         countDownPresenter.onValueUpdated(42)
 
         // Then
-        verify(mockCountDownScreen).setTimerValue(42)
+        verify(mockCountDownScreen).setTimerValue("42s")
         verifyNoMoreInteractions(mockCountDownScreen)
     }
 
@@ -220,31 +213,7 @@ class CountDownPresenterImplTest() {
         verify(mockAnalyticsManager).logSendFeedback()
     }
 
-    @Test
-    fun testSetInitialCountDownValue() {
-        // Given
-        countDownPresenter.screen = mockCountDownScreen
-        val countDownValue = CountDownValue.THIRTY_SECONDS
 
-        // When
-        countDownPresenter.setInitialCountDownValue(countDownValue)
 
-        // Then
-        verify(mockPreferencesPersistor).saveInitialDuration(countDownValue)
-        verify(mockAnalyticsManager).logChangeCountDownDuration(countDownValue.durationInSeconds)
-    }
 
-    @Test
-    fun testGetInitialCountDownValue() {
-        // Given
-        countDownPresenter.screen = mockCountDownScreen
-        val countDownValue = CountDownValue.THIRTY_SECONDS
-        countDownPresenter.setInitialCountDownValue(countDownValue)
-
-        // When
-        val countDownValueInSeconds = countDownPresenter.getInitialCountDownValue()
-
-        // Then
-        Assert.assertEquals(CountDownValue.THIRTY_SECONDS, countDownValueInSeconds)
-    }
 }
