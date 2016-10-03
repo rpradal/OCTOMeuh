@@ -6,10 +6,10 @@ import com.octo.mob.octomeuh.countdown.model.RepetitionMode
 import com.octo.mob.octomeuh.countdown.screen.CountDownScreen
 import com.octo.mob.octomeuh.countdown.utils.AudioInformationProvider
 import com.octo.mob.octomeuh.countdown.utils.CountDownListener
-import com.octo.mob.octomeuh.countdown.utils.HumanlyReadableDurationsConverter
 import com.octo.mob.octomeuh.countdown.utils.SecondCountDownTimer
 import com.octo.mob.octomeuh.transversal.AnalyticsManager
 import com.octo.mob.octomeuh.transversal.BasePresenterImpl
+import com.octo.mob.octomeuh.transversal.HumanlyReadableDurationsConverter
 import com.octo.mob.octomeuh.transversal.withNullable
 
 open class CountDownPresenterImpl(val analyticsManager: AnalyticsManager,
@@ -35,7 +35,7 @@ open class CountDownPresenterImpl(val analyticsManager: AnalyticsManager,
             setTimerVisibility(true)
 
             setStopAvailability(true)
-            setTimerValue(humanlyReadableDurationsConverter.getCompactReadableStringFromValueInSeconds(getInitialCountDownValue()))
+            setTimerValue(humanlyReadableDurationsConverter.getReadableStringFromValueInSeconds(getInitialCountDownValue()))
 
             setNextAttendeeVisibility(true)
             setStartVisibility(false)
@@ -69,7 +69,7 @@ open class CountDownPresenterImpl(val analyticsManager: AnalyticsManager,
     }
 
     override fun onValueUpdated(countValueInSeconds: Long) {
-        screen?.setTimerValue(humanlyReadableDurationsConverter.getCompactReadableStringFromValueInSeconds(countValueInSeconds.toInt()))
+        screen?.setTimerValue(humanlyReadableDurationsConverter.getReadableStringFromValueInSeconds(countValueInSeconds.toInt()))
     }
 
     override fun onCancelMeeting() {

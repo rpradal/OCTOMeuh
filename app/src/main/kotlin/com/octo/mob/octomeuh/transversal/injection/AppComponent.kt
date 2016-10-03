@@ -3,7 +3,6 @@ package com.octo.mob.octomeuh.transversal.injection
 import android.media.AudioManager
 import com.octo.mob.octomeuh.OctoMeuhApplication
 import com.octo.mob.octomeuh.countdown.manager.PreferencesPersistor
-import com.octo.mob.octomeuh.countdown.utils.HumanlyReadableDurationsConverter
 import com.octo.mob.octomeuh.transversal.AnalyticsManager
 import dagger.Component
 import javax.inject.Singleton
@@ -16,7 +15,6 @@ interface AppComponent {
 
     fun analyticsManager(): AnalyticsManager
     fun preferencePersistor(): PreferencesPersistor
-    fun humanlyReadableDurationConverter(): HumanlyReadableDurationsConverter
     fun audioManager(): AudioManager
 
     companion object Initializer {
