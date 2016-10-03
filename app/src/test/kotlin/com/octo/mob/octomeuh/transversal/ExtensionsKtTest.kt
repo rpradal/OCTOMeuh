@@ -4,10 +4,11 @@ import org.junit.Test
 import org.mockito.Mockito
 import org.mockito.Mockito.mock
 
+@Suppress("IllegalIdentifier")
 class ExtensionsKtTest {
 
     @Test
-    fun testWithNullable_WhenObjectIsNull_ShouldNotCrash() {
+    fun `When object is null inner block is not called and no crash occurs`() {
         // Given
         val nullFoo : FooInterface?  = null
 
@@ -20,7 +21,7 @@ class ExtensionsKtTest {
     }
 
     @Test
-    fun testWithNullable_WhenIsNotNull_ShouldCallSubmethods() {
+    fun `When object is not null method in block should be called`() {
         // Given
         val fooObject : FooInterface  = mock(FooInterface::class.java)
 

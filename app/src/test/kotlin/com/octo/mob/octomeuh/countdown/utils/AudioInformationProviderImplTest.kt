@@ -8,6 +8,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
+@Suppress("IllegalIdentifier")
 class AudioInformationProviderImplTest {
 
     @Mock
@@ -22,7 +23,7 @@ class AudioInformationProviderImplTest {
     }
 
     @Test
-    fun testIsSoundMuted_WhenAudioVolumeIsZero_ShouldReturnTrue() {
+    fun `When audio volume is zero then audi is muted`() {
         // Given
         Mockito.`when`(mockAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC)).thenReturn(0)
 
@@ -34,7 +35,7 @@ class AudioInformationProviderImplTest {
     }
 
     @Test
-    fun testIsSoundMuted_WhenAudioVolumeIsTwo_ShouldReturnFalse() {
+    fun `When audio volume is two then audio is not muted`() {
         // Given
         Mockito.`when`(mockAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC)).thenReturn(1)
 

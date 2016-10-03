@@ -13,6 +13,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
+@Suppress("IllegalIdentifier")
 class SettingsPresenterImplTest {
 
     @Mock
@@ -36,7 +37,7 @@ class SettingsPresenterImplTest {
     }
 
     @Test
-    fun attach_ShouldInitDefaultRepetitionModeValue() {
+    fun `When SettingsScreen is attached to the presenter repetition mode should be updated`() {
         // Given
         Mockito.`when`(preferencePersistor.getRepetitionMode()).thenReturn(RepetitionMode.STEP_BY_STEP)
 
@@ -48,7 +49,7 @@ class SettingsPresenterImplTest {
     }
 
     @Test
-    fun onRepetitionModeChangeRequest_WhenCurrentDurationIsStepByStep_ShouldShowDurationSelectionWithStepByStepSelected() {
+    fun `When current repetition mode is step by step we should display a selection with step by step preselected`() {
         // Given
         settingsPresenter.attach(settingsScreen)
         Mockito.`when`(preferencePersistor.getRepetitionMode()).thenReturn(RepetitionMode.STEP_BY_STEP)
@@ -61,7 +62,7 @@ class SettingsPresenterImplTest {
     }
 
     @Test
-    fun onRepetitionModeChangeRequest_WhenCurrentDurationIsLoop_ShouldShowDurationSelectionWithLoopSelected() {
+    fun `When current repetition mode is lopp we should display a selection with loop preselected`() {
         // Given
         settingsPresenter.attach(settingsScreen)
         Mockito.`when`(preferencePersistor.getRepetitionMode()).thenReturn(RepetitionMode.LOOP)
@@ -74,7 +75,7 @@ class SettingsPresenterImplTest {
     }
 
     @Test
-    fun onRepetitionModeChangeRequest() {
+    fun `When duration selection is called then we should display the duration selection view`() {
         // Given
         settingsPresenter.attach(settingsScreen)
 
@@ -86,7 +87,7 @@ class SettingsPresenterImplTest {
     }
 
     @Test
-    fun onRepetitionModeSelected_ShouldSaveNewModeAndUpdateValueDisplayed() {
+    fun `When a repetition mode is selected we should update the displayed value`() {
         // Given
         settingsPresenter.attach(settingsScreen)
 
