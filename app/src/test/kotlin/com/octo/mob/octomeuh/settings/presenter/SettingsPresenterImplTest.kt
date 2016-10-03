@@ -2,13 +2,12 @@ package com.octo.mob.octomeuh.settings.presenter
 
 import com.octo.mob.octomeuh.countdown.manager.PreferencesPersistor
 import com.octo.mob.octomeuh.countdown.model.RepetitionMode
-import com.octo.mob.octomeuh.countdown.utils.HumanlyReadableDurationsConverter
 import com.octo.mob.octomeuh.settings.model.RepetitionModeDescription
 import com.octo.mob.octomeuh.settings.screen.SettingsScreen
 import com.octo.mob.octomeuh.settings.utils.AppInformation
+import com.octo.mob.octomeuh.transversal.HumanlyReadableDurationsConverter
 import org.junit.Before
 import org.junit.Test
-
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations

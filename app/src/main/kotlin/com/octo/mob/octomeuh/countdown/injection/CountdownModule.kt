@@ -8,8 +8,9 @@ import com.octo.mob.octomeuh.countdown.presenter.UpsideDownPresenter
 import com.octo.mob.octomeuh.countdown.presenter.UpsideDownPresenterImpl
 import com.octo.mob.octomeuh.countdown.utils.AudioInformationProvider
 import com.octo.mob.octomeuh.countdown.utils.AudioInformationProviderImpl
-import com.octo.mob.octomeuh.countdown.utils.HumanlyReadableDurationsConverter
 import com.octo.mob.octomeuh.transversal.AnalyticsManager
+import com.octo.mob.octomeuh.transversal.CompactDurationConverterImpl
+import com.octo.mob.octomeuh.transversal.HumanlyReadableDurationsConverter
 import dagger.Module
 import dagger.Provides
 
@@ -27,6 +28,10 @@ class CountdownModule {
                 preferencesPersistor,
                 audioInformationProvider)
     }
+
+    @Provides
+    @CountDownScope
+    fun providesHumanelyReadableConverter() : HumanlyReadableDurationsConverter = CompactDurationConverterImpl()
 
     @Provides
     @CountDownScope

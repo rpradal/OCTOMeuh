@@ -4,9 +4,9 @@ import com.octo.mob.octomeuh.countdown.manager.PreferencesPersistor
 import com.octo.mob.octomeuh.countdown.model.RepetitionMode
 import com.octo.mob.octomeuh.countdown.screen.CountDownScreen
 import com.octo.mob.octomeuh.countdown.utils.AudioInformationProvider
-import com.octo.mob.octomeuh.countdown.utils.HumanlyReadableDurationsConverter
 import com.octo.mob.octomeuh.countdown.utils.SecondCountDownTimer
 import com.octo.mob.octomeuh.transversal.AnalyticsManager
+import com.octo.mob.octomeuh.transversal.HumanlyReadableDurationsConverter
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -31,7 +31,7 @@ class CountDownPresenterImplTest() {
         mockHumanlyReadableDurationsConverter = mock(HumanlyReadableDurationsConverter::class.java)
         mockAudioInformationProvider = mock(AudioInformationProvider::class.java)
 
-        Mockito.`when`(mockHumanlyReadableDurationsConverter.getCompactReadableStringFromValueInSeconds(Mockito.anyInt())).thenReturn("42s")
+        Mockito.`when`(mockHumanlyReadableDurationsConverter.getReadableStringFromValueInSeconds(Mockito.anyInt())).thenReturn("42s")
 
         countDownPresenter = CountDownPresenterImpl(mockAnalyticsManager, mockHumanlyReadableDurationsConverter, mockPreferencesPersistor, mockAudioInformationProvider)
     }
