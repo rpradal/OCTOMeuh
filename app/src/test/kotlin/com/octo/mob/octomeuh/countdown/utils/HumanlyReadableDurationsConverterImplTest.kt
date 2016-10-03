@@ -3,12 +3,13 @@ package com.octo.mob.octomeuh.countdown.utils
 import org.junit.Assert
 import org.junit.Test
 
+@Suppress("IllegalIdentifier")
 class HumanlyReadableDurationsConverterImplTest {
 
     val humanlyReadableDurationsConverter = HumanlyReadableDurationsConverterImpl()
 
     @Test
-    fun testGetReadableStringFromValueInSeconds_WhenLessThanAMinute_ShouldDisplayOnlySeconds() {
+    fun `When duration is below one minute we should display only seconds`() {
         // Given
         val duration = 42
 
@@ -20,7 +21,7 @@ class HumanlyReadableDurationsConverterImplTest {
     }
 
     @Test
-    fun testGetReadableStringFromValueInSeconds_WhenLessThanAnHour_ShouldDisplaySecondsAndMinutes() {
+    fun `When duration is less than an hout we should display minutes and seconds`() {
         // Given
         val duration = 92
 
@@ -32,7 +33,7 @@ class HumanlyReadableDurationsConverterImplTest {
     }
 
     @Test
-    fun testGetReadableStringFromValueInSeconds_WhenRoundNumberOfMinutes_ShouldDisplayMinutes() {
+    fun `When there is a round number of minutes we should not display seconds`() {
         // Given
         val duration = 60
 
@@ -44,7 +45,7 @@ class HumanlyReadableDurationsConverterImplTest {
     }
 
     @Test
-    fun testGetReadableStringFromValueInSeconds_WhenMoreThanAnHour_ShouldDisplaySecondsMinutesAndHours() {
+    fun `When more than one hour we should display hours minutes and seconds`() {
         // Given
         val duration = 10000
 
@@ -56,7 +57,7 @@ class HumanlyReadableDurationsConverterImplTest {
     }
 
     @Test
-    fun testGetReadableStringFromValueInSeconds_WhenRoundNumberOfHours_ShouldDisplayHours() {
+    fun `When there is a round number of hour we should not display minutes and seconds`() {
         // Given
         val duration = 7200
 
@@ -68,7 +69,7 @@ class HumanlyReadableDurationsConverterImplTest {
     }
 
     @Test
-    fun testGetCompactReadableStringFromValueInSeconds_WhenSecondsValueIsZero_ShouldNotReturnEmptyString() {
+    fun `When 0 seconds are remaining we should display 0s`() {
         // Given
         val duration = 0
 
@@ -80,7 +81,7 @@ class HumanlyReadableDurationsConverterImplTest {
     }
 
     @Test
-    fun testGetCompactReadableStringFromValueInSeconds_WhenLessThanAMinute_ShouldDisplayOnlySeconds() {
+    fun `When less than a minute we should display only seconds in a compact way`() {
         // Given
         val duration = 42
 
@@ -92,7 +93,7 @@ class HumanlyReadableDurationsConverterImplTest {
     }
 
     @Test
-    fun testGetCompactReadableStringFromValueInSeconds_WhenLessThanAnHour_ShouldDisplaySecondsAndMinutes() {
+    fun `When less than an hour we should display minutes and seconds in a compact way`() {
         // Given
         val duration = 92
 
@@ -104,7 +105,7 @@ class HumanlyReadableDurationsConverterImplTest {
     }
 
     @Test
-    fun testGetCompactReadableStringFromValueInSeconds_WhenRoundNumberOfMinutes_ShouldDisplayMinutes() {
+    fun `When round number of minutes we should display 00 seconds`() {
         // Given
         val duration = 60
 
@@ -116,7 +117,7 @@ class HumanlyReadableDurationsConverterImplTest {
     }
 
     @Test
-    fun testGetCompactReadableStringFromValueInSeconds_WhenMoreThanAnHour_ShouldDisplaySecondsMinutesAndHours() {
+    fun `When more than an hour we should display hours minutes and seconds in a compact way`() {
         // Given
         val duration = 10000
 
@@ -128,7 +129,7 @@ class HumanlyReadableDurationsConverterImplTest {
     }
 
     @Test
-    fun testGetCompactReadableStringFromValueInSeconds_WhenRoundNumberOfHours_ShouldDisplayHours() {
+    fun `When round number of hour we should display 00 minutes and 00 seconds`() {
         // Given
         val duration = 7200
 
@@ -140,7 +141,7 @@ class HumanlyReadableDurationsConverterImplTest {
     }
 
     @Test
-    fun testGetCompactReadableStringFromValueInSeconds_WhenSecondsValueIsZero_ShouldNotPadWithZero() {
+    fun `When timer is 0 we should display plain 0 with no padding`() {
         // Given
         val duration = 0
 

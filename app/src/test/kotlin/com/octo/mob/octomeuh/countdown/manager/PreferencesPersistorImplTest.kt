@@ -9,6 +9,7 @@ import org.mockito.Matchers
 import org.mockito.Mockito
 import org.mockito.Mockito.*
 
+@Suppress("IllegalIdentifier")
 class PreferencesPersistorImplTest{
 
     lateinit var mockSharedPreferences : SharedPreferences
@@ -21,7 +22,7 @@ class PreferencesPersistorImplTest{
     }
 
     @Test
-    fun testGetInitialDuration_WhenStoredValueIsInvalid_ShouldReturnDefaultValue() {
+    fun `When stored initial duration is invalid then the default duration should be returned`() {
         // Given
         `when`(mockSharedPreferences.getInt(eq(PreferencesPersistorImpl.INITIAL_DURATION_KEY), Matchers.anyInt())).thenThrow(ClassCastException::class.java)
 
@@ -33,7 +34,7 @@ class PreferencesPersistorImplTest{
     }
 
     @Test
-    fun testGetInitialDuration_WhenStoredKeyIsValid_ShouldReturnCorrespondingValue() {
+    fun `When the stored intial duration is valid then preference persistore should return it`() {
         // Given
         `when`(mockSharedPreferences.getInt(eq(PreferencesPersistorImpl.INITIAL_DURATION_KEY), Matchers.anyInt())).thenReturn(70)
 
@@ -45,7 +46,7 @@ class PreferencesPersistorImplTest{
     }
 
     @Test
-    fun testSaveInitialDuration() {
+    fun `Persisted initial duration should be properly written in shared preferences`() {
         // Given
         val editor = Mockito.mock(SharedPreferences.Editor::class.java)
         `when`(mockSharedPreferences.edit()).thenReturn(editor)
@@ -62,7 +63,7 @@ class PreferencesPersistorImplTest{
     }
 
     @Test
-    fun testSaveRepetitionMode() {
+    fun `Repetition mode should be properly written in shared preferences`() {
         // Given
         val editor = Mockito.mock(SharedPreferences.Editor::class.java)
         `when`(mockSharedPreferences.edit()).thenReturn(editor)
@@ -79,7 +80,7 @@ class PreferencesPersistorImplTest{
     }
 
     @Test
-    fun testGetRepetitionMode_WhenInvalidModeIsStored_ShouldReturnDefaultMode() {
+    fun `When the stored repetition mode cannot be read the default mode should be returned`() {
         // Given
         `when`(mockSharedPreferences.getString(eq(PreferencesPersistorImpl.REPETITION_MODE_KEY), Matchers.anyString())).thenReturn("foo key")
 
@@ -91,7 +92,7 @@ class PreferencesPersistorImplTest{
     }
 
     @Test
-    fun testGetRepetitionMode_WhenValidModeIsStored_ShouldReturnIt() {
+    fun `When the stored repetition mode can be read then it should be returned`() {
         // Given
         `when`(mockSharedPreferences.getString(eq(PreferencesPersistorImpl.REPETITION_MODE_KEY), Matchers.anyString())).thenReturn("LOOP")
 

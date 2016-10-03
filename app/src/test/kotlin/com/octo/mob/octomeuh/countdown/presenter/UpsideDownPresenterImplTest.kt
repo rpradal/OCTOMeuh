@@ -30,7 +30,7 @@ class UpsideDownPresenterImplTest {
 
     @Test
     @UseDataProvider("positions")
-    fun testRotationScenarii(testCaseScenario: Pair<IntArray, Int>) {
+    fun `Algorithm should comply with the different rotation scenarii`(testCaseScenario: Pair<IntArray, Int>) {
         // Given
         val positionArray = testCaseScenario.first
         val mockedRotatableScreen = mock(RotatableScreen::class.java)

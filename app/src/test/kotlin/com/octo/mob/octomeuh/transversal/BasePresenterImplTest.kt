@@ -5,6 +5,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito
 
+@Suppress("IllegalIdentifier")
 class BasePresenterImplTest {
 
     lateinit var presenter : BasePresenterImpl<Screen>
@@ -15,7 +16,7 @@ class BasePresenterImplTest {
     }
 
     @Test
-    fun testAttach() {
+    fun `When screen is attached then the attribute should be updated`() {
         // Given
         val screen = Mockito.mock(Screen::class.java)
 
@@ -27,7 +28,7 @@ class BasePresenterImplTest {
     }
 
     @Test
-    fun testDetach() {
+    fun `When presenter detach is called then the presenter should not retain reference to the screen`() {
         // Given
         val screen = Mockito.mock(Screen::class.java)
         presenter.attach(screen)

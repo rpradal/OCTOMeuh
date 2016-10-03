@@ -13,6 +13,7 @@ import org.junit.Test
 import org.mockito.Mockito
 import org.mockito.Mockito.*
 
+@Suppress("IllegalIdentifier")
 class CountDownPresenterImplTest() {
 
     lateinit var mockCountDownScreen: CountDownScreen
@@ -36,7 +37,7 @@ class CountDownPresenterImplTest() {
     }
 
     @Test
-    fun testStartTimer() {
+    fun `When timer start the view should switch to countdown mode`() {
         // Given
         val spyCountDownPresenter = Mockito.spy(countDownPresenter)
         doNothing().`when`(spyCountDownPresenter).restartTimer()
@@ -63,7 +64,7 @@ class CountDownPresenterImplTest() {
     }
 
     @Test
-    fun testCancelMeeting() {
+    fun `When countdown is canceled the view should reinit to landpage mode`() {
         // Given
         val spyCountDownPresenter = Mockito.spy(countDownPresenter)
         val mockCountDown = mock(SecondCountDownTimer::class.java)
@@ -88,7 +89,7 @@ class CountDownPresenterImplTest() {
     }
 
     @Test
-    fun testRestartTimer_WhenCountDownTimerIsNotExisting_ShouldInstantiateNewCountDown() {
+    fun `When CountDownTimer does not exist then restartTimer should reinit a new one`() {
         // Given
         val spyCountDownPresenter = Mockito.spy(countDownPresenter)
         val mockCountDown = mock(SecondCountDownTimer::class.java)
@@ -106,7 +107,7 @@ class CountDownPresenterImplTest() {
     }
 
     @Test
-    fun testRestartTimer_WhenCountDownTimerIsExisting_ShouldCancelCountDownAndRelaunchANewOne() {
+    fun `When a CountDownTimer is running restartTimer should cancel it and relaunch a new one`() {
         // Given
         val spyCountDownPresenter = Mockito.spy(countDownPresenter)
         val mockOldCountDown = mock(SecondCountDownTimer::class.java)
@@ -127,7 +128,7 @@ class CountDownPresenterImplTest() {
     }
 
     @Test
-    fun testIncreaseSpeakerCounter_ShouldIncreaseTotalSpeakerCountOfOne() {
+    fun `Displayed speaker counter should be increased when increaseSpeakerCounter is called`() {
         // Given
         val spyCountDownPresenter = Mockito.spy(countDownPresenter)
         spyCountDownPresenter.screen = mockCountDownScreen
@@ -142,7 +143,7 @@ class CountDownPresenterImplTest() {
     }
 
     @Test
-    fun testOnCountDownOver_WhenRepetModeIsLoop_ShouldNotifyTimerEndAndRestartTimer() {
+    fun `When loop mode is activated onCountDownOver should notify timer ends and restart a new timer`() {
         // Given
         val spyCountDownPresenter = Mockito.spy(countDownPresenter)
         spyCountDownPresenter.screen = mockCountDownScreen
@@ -159,7 +160,7 @@ class CountDownPresenterImplTest() {
     }
 
     @Test
-    fun testOnCountDownOver_WhenRepetModeIsStepByStep_ShouldNotifyTimerEndAndSwitchToFinishedMode() {
+    fun `When step by step mode is activated onCountDownOver should only trigger timer end`() {
         // Given
         countDownPresenter.screen = mockCountDownScreen
         `when`(mockPreferencesPersistor.getRepetitionMode()).thenReturn(RepetitionMode.STEP_BY_STEP)
@@ -174,7 +175,7 @@ class CountDownPresenterImplTest() {
     }
 
     @Test
-    fun testOnValueUpdated() {
+    fun `When countdown is updated then it should be displayed on the view`() {
         // Given
         countDownPresenter.screen = mockCountDownScreen
 
@@ -187,7 +188,7 @@ class CountDownPresenterImplTest() {
     }
 
     @Test
-    fun testOnNewSpeakerCountDown_ShouldRestartTimerAndIncreaseCounter() {
+    fun `When there is a new speaker the speaker counter should be increased`() {
         // Given
         val spyCountDownPresenter = Mockito.spy(countDownPresenter)
         doNothing().`when`(spyCountDownPresenter).restartTimer()
@@ -204,7 +205,7 @@ class CountDownPresenterImplTest() {
     }
 
     @Test
-    fun testOnActionFeedbackClicked() {
+    fun `When action feedback is clicked then feedback view should be displayed`() {
         // Given
         countDownPresenter.screen = mockCountDownScreen
 
@@ -217,7 +218,7 @@ class CountDownPresenterImplTest() {
     }
 
     @Test
-    fun testOnScreenFirstDisplayed_WhenSoundIsMuted_ShouldDisplayMessage() {
+    fun `When sound is muted then we should display a warning message`() {
         // Given
         countDownPresenter.screen = mockCountDownScreen
         Mockito.`when`(mockAudioInformationProvider.isSoundMuted()).thenReturn(true)
@@ -230,7 +231,7 @@ class CountDownPresenterImplTest() {
     }
 
     @Test
-    fun testOnScreenFirstDisplayed_WhenSoundIsNotMuted_NothingShouldHappen() {
+    fun `When sound is not muted then we should not display a warning message`() {
         // Given
         countDownPresenter.screen = mockCountDownScreen
         Mockito.`when`(mockAudioInformationProvider.isSoundMuted()).thenReturn(false)
